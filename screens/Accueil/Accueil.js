@@ -1,0 +1,69 @@
+import AccueilStyles from "./AccueilStyles";
+import AppStyles from "../../AppStyles";
+import { FlatList, View } from "react-native";
+import { AppSearchBar } from "../../components/AppSearchBar/AppSearchBar";
+import { Text } from "@rneui/base";
+import { AppOfferCard } from "../../components/AppOfferCard/AppOfferCard";
+
+export default () => {
+  const styles = { ...AppStyles(), ...AccueilStyles() };
+
+  const handleEndEditing = (value) => console.log(value);
+
+  const data = [
+    {
+      id: 1,
+      titre: "Première offre",
+      etat: "neuf",
+      prix: "99",
+      uri: "https://placehold.co/300x400/png",
+    },
+    {
+      id: 2,
+      titre: "Deuxième offre",
+      etat: "Bon etat",
+      prix: "77,00",
+      uri: "https://placehold.co/600x300/png",
+    },
+    {
+      id: 3,
+      titre: "Troisième offre",
+      etat: "Mauvais état",
+      prix: "1,00",
+      uri: "https://placehold.co/300x600/png",
+    },
+    {
+      id: 4,
+      titre: "Quatrième offre",
+      etat: "neuf",
+      prix: "9,99",
+      uri: "https://placehold.co/50x50/png",
+    },
+  ];
+
+  return (
+    <View style={[styles.container, styles.safeArea]}>
+      <View style={styles.containerMargin}>
+        <AppSearchBar onEndEditing={handleEndEditing}></AppSearchBar>
+        <Text h4 style={{ marginTop: 10, marginBottom: 10 }}>
+          Derniers Ajouts
+        </Text>
+
+        <FlatList
+          data={data}
+          horizontal={true}
+          renderItem={({ item }) => (
+            <AppOfferCard
+              style={{ marginRight: 10 }}
+              titre={item.titre}
+              etat={item.etat}
+              prix={item.prix}
+              uri={item.uri}
+            ></AppOfferCard>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
+    </View>
+  );
+};
