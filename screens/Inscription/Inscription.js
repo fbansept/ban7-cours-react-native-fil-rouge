@@ -16,14 +16,21 @@ export default () => {
     getValues,
   } = useForm();
 
+  
+
   const onSubmit = (data) => console.log(data);
 
   return (
     <View style={styles.container}>
-      <AppInputEmail control={control} errors={errors}></AppInputEmail>
+      <AppInputEmail
+        control={control}
+        errors={errors}
+        extraRules={{ required: true }}
+      ></AppInputEmail>
       <AppInputNewPassword
         control={control}
         errors={errors}
+        extraRules={{ required: true }}
       ></AppInputNewPassword>
       <AppButton text="Valider" onPress={handleSubmit(onSubmit)}></AppButton>
     </View>

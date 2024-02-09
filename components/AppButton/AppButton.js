@@ -24,7 +24,7 @@ export const AppButton = ({
         pressed && styles.pressed,
       ]}
     >
-      <View style={styles.row}>
+      <View style={[styles.row, styles.centered]}>
         {icon && (
           <Icon
             name={icon}

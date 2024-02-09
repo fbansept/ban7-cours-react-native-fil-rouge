@@ -47,8 +47,6 @@ export default function AppStyles() {
     },
     row: {
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
       flexDirection: "row",
     },
   });

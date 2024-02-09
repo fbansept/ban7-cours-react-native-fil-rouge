@@ -2,8 +2,9 @@ import { Input } from "@rneui/base";
 import { Controller } from "react-hook-form";
 import AppStyles from "../../AppStyles";
 import AppInputEmailStyles from "./AppInputEmailStyles";
+import { Text, TextInput } from "react-native";
 
-export default AppInputEmail = ({ control, errors }) => {
+export default AppInputEmail = ({ control, errors, extraRules = [] }) => {
   const styles = { ...AppStyles(), ...AppInputEmailStyles() };
 
   return (
@@ -18,7 +19,7 @@ export default AppInputEmail = ({ control, errors }) => {
           label="Email"
           errorStyle={{ color: "red" }}
           errorMessage={
-            errors.email ? "Veuillez entrer une adresse email valide." : ""
+            errors.email ? errors.email.message : ""
           }
         />
       )}
@@ -29,6 +30,7 @@ export default AppInputEmail = ({ control, errors }) => {
           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
           message: "Veuillez entrer une adresse email valide.",
         },
+        ...extraRules,
       }}
       defaultValue=""
     />

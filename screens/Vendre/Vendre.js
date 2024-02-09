@@ -5,6 +5,7 @@ import VendreStyles from "./VendreStyles";
 import { AppInputText } from "../../components/AppInputText/AppInputText";
 import { AppInputSelect } from "../../components/AppInputSelect/AppInputSelect";
 import { AppButton } from "../../components/AppButton/AppButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default () => {
   const styles = { ...AppStyles(), ...VendreStyles() };
@@ -16,12 +17,15 @@ export default () => {
     getValues,
   } = useForm();
 
-  const onSubmit = (offre) => {
-    console.log(offre);
+  const onSubmit = async (offre) => {
+    
+    const jwt = await AsyncStorage.getItem("jwt");
+
     fetch("http://192.168.43.137:4000/offre", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify(offre),
     })

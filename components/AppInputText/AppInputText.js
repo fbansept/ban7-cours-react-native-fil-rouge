@@ -6,7 +6,6 @@ import { Input } from "@rneui/themed";
 export const AppInputText = ({
   label,
   defaultValue,
-  rules,
   errorMessage,
   control,
   name,
@@ -14,6 +13,7 @@ export const AppInputText = ({
   multiline = false,
   numberOfLines = 4,
   inputMode = "text",
+  extraRules = [] 
 }) => {
   const styles = { ...AppStyles(), ...AppInputTextStyles() };
 
@@ -22,7 +22,7 @@ export const AppInputText = ({
       control={control}
       render={({ field: { onChange, onBlur, value } }) => (
         <Input
-          style={{margin:0, padding: 0}}
+          style={{ margin: 0, padding: 0 }}
           multiline={multiline}
           numberOfLines={multiline ? numberOfLines : 1}
           onBlur={onBlur}
@@ -37,7 +37,7 @@ export const AppInputText = ({
         />
       )}
       name={name}
-      rules={rules}
+      rules={extraRules}
       defaultValue={defaultValue}
     />
   );

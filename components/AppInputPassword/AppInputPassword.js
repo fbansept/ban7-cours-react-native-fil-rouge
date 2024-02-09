@@ -3,7 +3,7 @@ import AppStyles from "../../AppStyles";
 import AppInputPasswordStyles from "./AppInputPasswordStyles";
 import { Input } from "@rneui/themed";
 
-export default AppInputPassword = ({ control, errors }) => {
+export default AppInputPassword = ({ control, errors, extraRules = [] }) => {
   const styles = { ...AppStyles(), ...AppInputPasswordStyles() };
 
   return (
@@ -19,9 +19,12 @@ export default AppInputPassword = ({ control, errors }) => {
               onChange(text);
             }}
             value={value}
+            errorStyle={{ color: "red" }}
+            errorMessage={errors.password ? errors.password.message : ""}
           />
         </>
       )}
+      rules={extraRules}
       name="password"
       defaultValue=""
     />
