@@ -2,29 +2,7 @@ import ProfilStyles from "./ProfilStyles";
 import AppStyles from "../../AppStyles";
 import { Text, View } from "react-native";
 import { AppButton } from "../../components/AppButton/AppButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { decode } from "base-64";
-
-function decodeJWT(jwt) {
-  try {
-    const base64Url = jwt.split(".")[1]; // Récupère le payload du jwt
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Convertit en base64 standard
-    const jsonPayload = decodeURIComponent(
-      decode(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-
-    return JSON.parse(jsonPayload);
-  } catch (e) {
-    console.error("Erreur lors du décodage du JWT:", e);
-    return null;
-  }
-}
 
 export default ({ handleLogout }) => {
   const styles = { ...AppStyles(), ...ProfilStyles() };
@@ -32,21 +10,26 @@ export default ({ handleLogout }) => {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    // Récupérer le JWT depuis AsyncStorage
-    const fetchJwt = async () => {
-      const jwt = await AsyncStorage.getItem("jwt");
-      if (jwt) {
-        const decoded = decodeJWT(jwt);
 
-        setUserInfo({
-          nom: decoded.nom,
-          prenom: decoded.prenom,
-          email: decoded.email,
-        });
+    const fetchProfil = async () => {
+      const response = await fetch("http://192.168.43.137:4000/profil", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("La récupération du profil a échoué");
       }
+      const profil = await response.json();
+
+      setUserInfo({
+        nom: profil.nom,
+        prenom: profil.prenom,
+        email: profil.email,
+      });
     };
 
-    fetchJwt();
+    fetchProfil();
   }, []);
 
   return (

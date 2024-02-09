@@ -102,7 +102,7 @@ export default () => {
       await AsyncStorage.removeItem("jwt");
       navigationRef.current.reset({
         index: 0,
-        routes: [{ name: "Inscription" }],
+        routes: [{ name: "Connexion" }],
       });
     };
 

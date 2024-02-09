@@ -1,7 +1,6 @@
 import { Pressable } from "react-native";
 import AppStyles from "../../AppStyles";
 import { Icon, Text } from "@rneui/base";
-import { useState } from "react";
 import AppButtonStyles from "./AppButtonStyles";
 import { View } from "react-native";
 

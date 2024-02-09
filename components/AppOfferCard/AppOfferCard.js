@@ -4,7 +4,15 @@ import AppOfferCardStyles from "./AppOfferCardStyles";
 import { useState } from "react";
 import { Image, Text } from "@rneui/base";
 
-export const AppOfferCard = ({ style, uri, titre, etat, prix, onPress }) => {
+export const AppOfferCard = ({
+  style,
+  uri,
+  titre,
+  etat,
+  prix,
+  vendeur,
+  onPress,
+}) => {
   const styles = { ...AppStyles(), ...AppOfferCardStyles() };
 
   const [elevation, setElevation] = useState(2);
@@ -18,9 +26,7 @@ export const AppOfferCard = ({ style, uri, titre, etat, prix, onPress }) => {
   };
 
   return (
-    <Pressable
-      style={[style, { width: 150, height: 280 }]}
-    >
+    <Pressable style={[style, { width: 150, height: 280 }]}>
       <View
         style={{
           width: 150,
@@ -40,6 +46,7 @@ export const AppOfferCard = ({ style, uri, titre, etat, prix, onPress }) => {
       <Text>{titre}</Text>
       <Text>{etat}</Text>
       <Text>{prix}€</Text>
+      <Text>Vendue par {vendeur}</Text>
     </Pressable>
   );
 };

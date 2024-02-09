@@ -20,7 +20,7 @@ export default ({ handleLogin }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "a@a", // à supprimer
+      email: "a@a.com", // à supprimer
       password: "root", // à supprimer
     },
   });

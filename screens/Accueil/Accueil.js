@@ -83,6 +83,7 @@ export default () => {
               etat={item.etat}
               prix={item.prix}
               uri={item.photos[0]}
+              vendeur={item.utilisateur.nom}
             ></AppOfferCard>
           )}
           keyExtractor={(item) => item._id}
